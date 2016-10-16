@@ -55,7 +55,7 @@ public class Trajet {
 			e.liste();
 	}
 
-	// TODO modifié
+	// TODO modifiÃ©
 	/**
 	 * Un trajet est cherent si chacune des etapes est coherente et s'enchainent correctement: 
 	 * le lieu de depart de l'etape i = le lieu d'arrivee de l'etape i-1 
@@ -70,7 +70,7 @@ public class Trajet {
 				// et l'heure de depart >= heure d'arrivee de la precedente
 				try {
 					if (i > 0 && sesEtapes.get(i).depart().equals(sesEtapes.get(i - 1).arrivee())
-							&& sesEtapes.get(i).hDepart().compareTo(sesEtapes.get(i - 1).hArrivee()) > 0) {
+							&& sesEtapes.get(i).hDepart().compareTo(sesEtapes.get(i - 1).hArrivee()) >= 0) {
 						continue;
 					} else if (i != 0) {
 						return false;
