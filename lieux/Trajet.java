@@ -131,8 +131,31 @@ public class Trajet {
 		return sesEtapes.size();
 	}
 
+
 	public static Trajet meilleur(Collection<Trajet> col, Comparateur comp) throws ErreurTrajet {
-		return null;
+		Trajet meilleur = null;
+		Trajet temp = null;
+		int resComp = 0;
+
+		Iterator<Trajet> itr = col.iterator();
+		meilleur = itr.next();
+		if (!meilleur.estCoherent())
+			throw new ErreurTrajet();
+
+		while (itr.hasNext()) {
+			temp = itr.next();
+			
+			if (!temp.estCoherent())
+				throw new ErreurTrajet();
+			
+			resComp = comp.compare(meilleur, temp);
+			if (resComp == 1)
+				meilleur = temp;
+			else if(resComp == -2)
+				throw new ErreurTrajet();
+		}
+
+		return meilleur;
 	}
 
 }
