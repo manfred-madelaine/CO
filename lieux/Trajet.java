@@ -55,7 +55,7 @@ public class Trajet {
 			e.liste();
 	}
 
-	// TODO modifiÃ©
+	// TODO modifié
 	/**
 	 * Un trajet est cherent si chacune des etapes est coherente et s'enchainent correctement: 
 	 * le lieu de depart de l'etape i = le lieu d'arrivee de l'etape i-1 
@@ -131,7 +131,16 @@ public class Trajet {
 	}
 
 	public int nbChgt() throws ErreurTrajet {
-		return sesEtapes.size();
+		//table des differents Moyens de transport utilises (unique)
+		ArrayList<MoyenTransport> listeChgt = new ArrayList<>();
+		listeChgt.add(sesEtapes.get(0).moyen());
+		for (Etape e : sesEtapes) {
+			
+			if( e.moyen().toString() != listeChgt.get(listeChgt.size()-1).toString() ){
+				listeChgt.add(e.moyen());
+			}
+		}
+		return listeChgt.size();
 	}
 
 	public static Trajet meilleur(Collection<Trajet> col, Comparateur comp) throws ErreurTrajet {
