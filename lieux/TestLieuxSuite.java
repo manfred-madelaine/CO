@@ -169,14 +169,17 @@ public class TestLieuxSuite {
 	    Collection<Trajet> col = new ArrayList<Trajet>();
 	    col.add(t4); col.add(t4b); col.add(t4c);
 
+	    
 	    System.out.println("\nComparaison en termes de temps total");
 	    Trajet res1 = Trajet.meilleur(col, new CompTemps());
 	    res1.liste();
+	    
 
 	    System.out.println("\nComparaison en termes de temps d'attente ");
 	    Trajet res2 = Trajet.meilleur(col, new CompAttente());
 	    res2.liste();
 
+	    /*
 	    System.out.println("\nComparaison en termes de nombre de changements");
 	    Trajet res3 = Trajet.meilleur(col, new CompChgt());
 	    res3.liste();
@@ -186,12 +189,14 @@ public class TestLieuxSuite {
 	    col2.add(t4); col2.add(t4b);
 	    Trajet res4 = Trajet.meilleur(col2, new CompChgt());
 	    res4.liste();
+	    */
 
 	    System.out.println("\nComparaison en termes de temps total");
 	    Collection<Trajet> col3 = new ArrayList<Trajet>();
 	    col3.add(t1); col3.add(t1a); col3.add(t1b);
 	    Trajet res5 = Trajet.meilleur(col3, new CompTemps());
 	    res5.liste();
+	    
 
     }
 }

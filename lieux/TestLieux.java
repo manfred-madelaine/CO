@@ -50,8 +50,7 @@ public class TestLieux {
 	static void setDistances() throws ErreurTrajet, ErreurHeure {
 		B620.addVoisin(APlateau, new Heure(0, 2));
 		B640.addVoisin(APlateau, new Heure(0, 5));
-		
-		AOrsay.addVoisin(OrsayVille, new Heure(0, 10));
+		AOrsay.addVoisin(OrsayVille, new Heure(0, 1));
 		/* on peut rejoindre l'arret Chateau a pieds mais c'est long */
 		AOrsay.addVoisin(AChateau, new Heure(0, 15));
 		AChateau.addVoisin(APlateau, new Heure(0, 30));
@@ -74,6 +73,7 @@ public class TestLieux {
 		if (t.estCoherent()) {
 			t.liste();
 			System.out.println("Heure d'arrivee pour " + t.nom() + ": " + t.hArrivee().toString());
+			System.out.println();
 		} else {
 			System.out.println("Trajet " + t.nom() + " est incoherent !");
 		}
@@ -95,22 +95,20 @@ public class TestLieux {
 		return new Trajet("t0b", AGuichet, ASupelec, dep, res);
 	}
 
-	//TODO
 	public static Trajet mkTrajet1() throws ErreurTrajet, ErreurHeure {
 		ArrayList<Etape> res = new ArrayList<Etape>();
 		Heure dep = new Heure(8, 50);
 		res.add(new Etape(OrsayVille, AOrsay, new APieds(), dep));
-		res.add(new Etape(AOrsay, APlateau, new EnBus(L1), new Heure(9, 10)));
-		res.add(new Etape(APlateau, B640, new APieds(), new Heure(9, 38)));
-		res.add(new Etape(B640, B620, new APieds(), new Heure(9, 43)));
+		res.add(new Etape(AOrsay, APlateau, new EnBus(L1), new Heure(9, 0)));
+		res.add(new Etape(APlateau, B640, new APieds(), new Heure(9, 8)));
+		res.add(new Etape(B640, B620, new APieds(), new Heure(9, 13)));
 		return new Trajet("t1", OrsayVille, B620, dep, res);
 	}
 
-	/*
-	 * Le meme mais en flanant a differents arrets, ce qui fait qu'on n'arrive
-	 * pas	le plus tot possible. On n'est pas, oblige de n'avoir que des egalites
-	 * horaires entre deux etapes.
-	 */
+	// Le meme mais en flanant a differents arrets, ce qui fait qu'on n'arrive
+	// pas
+	// le plus tot possible. On n'est pas, oblige de n'avoir que des egalites
+	// horaires entre deux etapes.
 	public static Trajet mkTrajet1a() throws ErreurTrajet, ErreurHeure {
 		ArrayList<Etape> res = new ArrayList<Etape>();
 		Heure dep = new Heure(8, 50);
@@ -130,7 +128,6 @@ public class TestLieux {
 		return new Trajet("t1b", OrsayVille, B620, dep, res);
 	}
 
-	//partir d'un lieu pour arriver au meme lieu. aucun trajet possible: hdep = harr
 	public static Trajet mkTrajet2() throws ErreurTrajet, ErreurHeure {
 		ArrayList<Etape> res = new ArrayList<Etape>();
 		Lieu l1 = OrsayVille;
@@ -184,20 +181,27 @@ public class TestLieux {
 		setDistances();
 		addRaccourci();
 		setHoraires();
-//		Trajet t0a = mkTrajet0a();
-//		testeTrajet(t0a);
-//		
-//		Trajet t0b = mkTrajet0b();
-//		testeTrajet(t0b);
-//		Trajet t1 = mkTrajet1();
-//		Trajet t1a = mkTrajet1a();
-//		Trajet t1b = mkTrajet1b();
-//		Trajet t2 = mkTrajet2();
-//		Trajet t3 = mkTrajet3();
-//		testeTrajet(t1);
-//		testeTrajet(t1a);
-//		testeTrajet(t1b);
-//		testeTrajet(t2);
-//		testeTrajet(t3);
+		Trajet t0a = mkTrajet0a();
+		System.out.println("TEST 0a\n");
+		testeTrajet(t0a);
+		
+		Trajet t0b = mkTrajet0b();
+		System.out.println("\n TEST 0b\n");
+		testeTrajet(t0b);
+		Trajet t1 = mkTrajet1();
+		Trajet t1a = mkTrajet1a();
+		Trajet t1b = mkTrajet1b();
+		Trajet t2 = mkTrajet2();
+		Trajet t3 = mkTrajet3();
+		System.out.println("\n TEST 1\n");
+		testeTrajet(t1);
+		System.out.println("\n TEST 1a\n");
+		testeTrajet(t1a);
+		System.out.println("\n TEST 1b\n");
+		testeTrajet(t1b);
+		System.out.println("\n TEST 2\n");
+		testeTrajet(t2);
+		System.out.println("\n TEST 3\n");
+		testeTrajet(t3);
 	}
 }
