@@ -55,11 +55,11 @@ public class Trajet {
 			e.liste();
 	}
 
-	// TODO modifié
 	/**
-	 * Un trajet est cherent si chacune des etapes est coherente et s'enchainent correctement: 
-	 * le lieu de depart de l'etape i = le lieu d'arrivee de l'etape i-1 
-	 * l'heure de depart de l'etape i >= l'heure d'arrivee de l'etape i-1
+	 * Un trajet est cherent si chacune des etapes est coherente et s'enchainent
+	 * correctement: le lieu de depart de l'etape i = le lieu d'arrivee de
+	 * l'etape i-1 l'heure de depart de l'etape i >= l'heure d'arrivee de
+	 * l'etape i-1
 	 * 
 	 * @return true si toutes les etapes du trajet sont coherentes, false sinon
 	 */
@@ -83,7 +83,6 @@ public class Trajet {
 		return true;
 	}
 
-	// TODO
 	/**
 	 * heure d'arrivee = heure de depart + delai de chaque etape
 	 * 
@@ -92,29 +91,25 @@ public class Trajet {
 	 */
 	public Heure hArrivee() throws ErreurTrajet {
 		Heure h = dateDepart;
-		int i = 0;
 		for (Etape e : sesEtapes) {
 			try {
 
-				System.out.println("\n\tEtape " + i + ": h = " + h);
 				h = h.add(h.delaiAvant(e.hArrivee()));
 			} catch (ErreurHeure e1) {
 				throw new ErreurTrajet("Trajet impossible, le trajet doit se faire dans la journee");
 			}
-			i++;
 		}
 		return h;
 	}
 
 	public Heure duree() throws ErreurTrajet {
 		Heure h = new Heure();
-		for (Etape e : sesEtapes) {
-			try {
-				h = h.add(e.duree());
-			} catch (ErreurHeure e1) {
-				throw new ErreurTrajet("Trajet impossible, le trajet doit se faire dans la journee");
-			}
+		try {
+			h = h.add(sesEtapes().get(0).hDepart().delaiAvant(sesEtapes().get(sesEtapes().size() - 1).hArrivee()));
+		} catch (ErreurHeure e1) {
+			throw new ErreurTrajet("Trajet impossible, le trajet doit se faire dans la journee");
 		}
+
 		return h;
 	}
 
@@ -131,16 +126,14 @@ public class Trajet {
 	}
 
 	public int nbChgt() throws ErreurTrajet {
-		//table des differents Moyens de transport utilises (unique)
-		ArrayList<MoyenTransport> listeChgt = new ArrayList<>();
-		listeChgt.add(sesEtapes.get(0).moyen());
-		for (Etape e : sesEtapes) {
-			
-			if( e.moyen().toString() != listeChgt.get(listeChgt.size()-1).toString() ){
-				listeChgt.add(e.moyen());
-			}
+		int nbChgt = 0;
+
+		for (int i = 0; i < sesEtapes.size() - 1; i++) {
+			if (sesEtapes.get(i).moyen().estChangement(sesEtapes.get(i + 1).moyen()))
+				nbChgt++;
 		}
-		return listeChgt.size();
+
+		return nbChgt;
 	}
 
 	public static Trajet meilleur(Collection<Trajet> col, Comparateur comp) throws ErreurTrajet {

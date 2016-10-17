@@ -182,26 +182,18 @@ public class TestLieux {
 		addRaccourci();
 		setHoraires();
 		Trajet t0a = mkTrajet0a();
-		System.out.println("TEST 0a\n");
 		testeTrajet(t0a);
-		
 		Trajet t0b = mkTrajet0b();
-		System.out.println("\n TEST 0b\n");
 		testeTrajet(t0b);
 		Trajet t1 = mkTrajet1();
 		Trajet t1a = mkTrajet1a();
 		Trajet t1b = mkTrajet1b();
 		Trajet t2 = mkTrajet2();
 		Trajet t3 = mkTrajet3();
-		System.out.println("\n TEST 1\n");
 		testeTrajet(t1);
-		System.out.println("\n TEST 1a\n");
 		testeTrajet(t1a);
-		System.out.println("\n TEST 1b\n");
 		testeTrajet(t1b);
-		System.out.println("\n TEST 2\n");
 		testeTrajet(t2);
-		System.out.println("\n TEST 3\n");
 		testeTrajet(t3);
 	}
 }

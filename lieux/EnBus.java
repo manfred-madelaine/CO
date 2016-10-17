@@ -11,7 +11,6 @@ public class EnBus extends MoyenTransport {
 		return "Ligne Bus [" + saLigne.nom() + "]";
 	}
 
-	// TODO
 	public boolean estPossible(Lieu l1, Lieu l2, Heure dep) {
 		// si les lieux sont compris dans la liste d'arrets de la ligne de bus
 		if (saLigne.sesArrets.contains(l1) && saLigne.sesArrets.contains(l2)) {
@@ -40,5 +39,21 @@ public class EnBus extends MoyenTransport {
 			return saLigne.dureeEnBus(saLigne.sesArrets.get(i1), saLigne.sesArrets.get(i2));
 		} else
 			throw new ErreurTrajet("Trajet impossible.");
+	}
+
+	/*
+	 * Si cette methode est appelee c'est qu'on change de ligne de bus, cela
+	 * compte donc comme un changement.
+	 */
+	public boolean estChangement(MoyenTransport m) {
+		return true;
+	}
+
+	/*
+	 * Cette methode sera appelee si on passe du moyen de transport APieds au
+	 * moyen EnBus (true = changement).
+	 */
+	public boolean estAPieds() {
+		return true;
 	}
 }

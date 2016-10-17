@@ -26,4 +26,8 @@ public abstract class MoyenTransport {
 			throw new ErreurTrajet("Probleme avec les horaires");
 		}
 	}
+	
+	public abstract boolean estChangement(MoyenTransport m);
+
+	public abstract boolean estAPieds();
 }

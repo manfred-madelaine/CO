@@ -48,7 +48,6 @@ public class Etape {
 		return hdep;
 	}
 
-	// TODO
 	/**
 	 * heure d'arrivee = heure de depart + temps d'attente selon le M de T + duree de trajet du M de T
 	 * 
@@ -58,7 +57,6 @@ public class Etape {
 	public Heure hArrivee() throws ErreurTrajet {
 		if (estPossible()) {
 			Heure h = hdep;
-			System.out.println("au depart: "+h.toString()+", tps d'attente :" + moyen.attente(dep, arr, h) + ", duree etape :" + moyen.duree(dep, arr, h));
 			
 			try {
 				h = h.add( moyen.attente(dep, arr, h) );
@@ -71,7 +69,6 @@ public class Etape {
 		else throw new ErreurTrajet("Etape impossible.");
 	}
 
-	// TODO
 	/**
 	 * On ne peut se rendre de depart a arrivee, que si le moyen de transport l'autorise
 	 * 

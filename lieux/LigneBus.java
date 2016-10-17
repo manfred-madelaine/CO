@@ -44,7 +44,6 @@ public class LigneBus {
 		sesTemps = horaire;
 	}
 
-	// TODO
 	/**
 	 * on peut voyager sur une ligne uniquement si l'arret de depart est situe
 	 * avant l'arret d'arrivee dans la liste (ordonnee) des arrets car la ligne
@@ -127,7 +126,6 @@ public class LigneBus {
 			while (sesDeparts[i].compareTo(h) == -1)
 				i++;
 
-			System.out.println("i = " + i);
 			Heure arrive = sesDeparts[i];
 			try {
 				arrive = arrive.add(dureeEnBus(sesArrets.get(0), a));
